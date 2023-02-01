@@ -8,7 +8,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        "primary-dark": "#484850",
+        "primary-dark": "#121212",
+        "secondary-dark": "#1e1e1e",
+        "primary-light": "#fff",
+        "secondary-light": "#feffff",
       },
       backgroundImage: {
         "header-bg-1": "url('/src/assets/header-background/header-bg-1.jpg')",

@@ -1,14 +1,16 @@
-import React, { FC, ReactNode } from "react";
-import { MenubarIcon, MoonIcon, NotificationIcon } from "../Icons";
-import UserDropdown from "../UserDropdown/UserDropdown";
+import { FC, ReactNode } from "react";
+import { appFuncsType } from "../../types/app_funcs";
+import { MenubarIcon, MoonIcon, NotificationIcon, SunIcon } from "./../Icons";
+import UserDropdown from "./../UserDropdown/UserDropdown";
 
 const PageLayout: FC<{
   children: ReactNode;
   pageTitle: string;
-  appFuncs: any;
-}> = ({ children, pageTitle, appFuncs }) => {
+  appFuncs: appFuncsType;
+  bodyExtendClass?: string;
+}> = ({ children, pageTitle, appFuncs, bodyExtendClass }) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className={`flex flex-col gap-2 `}>
       <header
         className={`relative header--fade-gradient min-h-[10rem] py-4 bg-header-bg-1 dark:bg-header-bg-6 bg-cover bg-bottom dark:md:bg-center`}
       >
@@ -18,29 +20,34 @@ const PageLayout: FC<{
               userFullName="محمدصادق راستگو"
               userAvatar="/src/assets/user-avatar.jpg"
             />
-            <button
-              className="transition-colors hover:bg-[#1e1e1e] hover:bg-opacity-60 rounded-full p-1"
-              onClick={() => appFuncs.changeHeaderBg()}
-            >
+            <button className="transition-colors bg-primary-dark shadow-lg bg-opacity-50 rounded-full p-1">
               <NotificationIcon color="#fff" />
             </button>
             <button
-              className="transition-colors hover:bg-[#1e1e1e] hover:bg-opacity-60 rounded-full p-1"
+              className="transition-colors bg-primary-dark shadow-lg bg-opacity-50 rounded-full p-1"
               onClick={() => appFuncs.switchDarkLightMode()}
             >
-              <MoonIcon color="#fff" />
+              {appFuncs.getIsDarkMode() ? (
+                <SunIcon color="#fff" />
+              ) : (
+                <MoonIcon color="#fff" />
+              )}
             </button>
           </div>
-          <button className="col-start-2 self-center transition-colors bg-slate-900 bg-opacity-60 hover:bg-opacity-80 rounded w-[30px] h-[30px] flex justify-center items-center lg:hidden">
+          <button className="col-start-2 self-center transition-colors bg-primary-dark bg-opacity-50 hover:bg-opacity-70 rounded w-[30px] h-[30px] flex justify-center items-center lg:hidden shadow-lg">
             <MenubarIcon color="#fff" />
           </button>
-          <h1 className="lg:col-span-1 lg:col-start-2 col-span-full text-right font-bold text-primary-dark text-2xl justify-end items-center flex dark:text-white">
+          <h1 className="lg:col-span-1 lg:col-start-2 col-span-full text-right font-medium text-secondary-dark text-2xl justify-end items-center flex dark:text-white">
             {pageTitle}
           </h1>
         </div>
       </header>
       <main>
-        <div className="grid gap-5 w-11/12 mx-auto mt-5">{children}</div>
+        <div
+          className={`grid gap-5 w-11/12 max-w-7xl mx-auto my-5 ${bodyExtendClass}`}
+        >
+          {children}
+        </div>
       </main>
     </div>
   );
